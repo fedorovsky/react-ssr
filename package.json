@@ -1,0 +1,8 @@
+{
+  "name": "react-ssr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:fedorovsky/react-ssr.git",
+  "author": "Anton Fedorovskyi <a.fedorovskyi@plarium.com>",
+  "license": "MIT"
+}

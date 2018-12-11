@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { messageSelector, addMessage } from '../ducks/notification';
 
 class App extends Component {
   state = {
-    title: 'World',
+    title: 'Hello World',
   };
 
   render() {
-    return <div>Hello {this.state.title}</div>;
+    return (
+      <div>
+        <h2>[STATE]: {this.state.title}</h2>
+        <h2>[PROPS]: {this.props.message}</h2>
+        <button onClick={() => this.props.addMessage('CHANGE MESSAGE')}>
+          ADD MESSAGE
+        </button>
+      </div>
+    );
   }
 }
 
-export default App;
+export default connect(
+  state => ({
+    message: messageSelector(state),
+  }),
+  { addMessage },
+)(App);

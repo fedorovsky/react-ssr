@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import express from 'express';
 import path from 'path';
 import { Provider as ReduxProvider } from 'react-redux';
-import createStore from './store';
+import createStore from './redux';
 import App from './components/App';
 
 const app = express();
@@ -40,7 +40,6 @@ function template({ body, title, reduxState }) {
               <meta charset="utf-8">
               <title>${title}</title>
           </head>
-
           <body>
               <div id="app">${body}</div>
           </body>

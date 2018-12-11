@@ -24010,6 +24010,38 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "../node_modules/redux-devtools-extension/index.js":
+/*!*********************************************************!*\
+  !*** ../node_modules/redux-devtools-extension/index.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var compose = __webpack_require__(/*! redux */ "../node_modules/redux/es/redux.js").compose;
+
+exports.__esModule = true;
+exports.composeWithDevTools = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :
+    function() {
+      if (arguments.length === 0) return undefined;
+      if (typeof arguments[0] === 'object') return compose;
+      return compose.apply(null, arguments);
+    }
+);
+
+exports.devToolsEnhancer = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION__ :
+    function() { return function(noop) { return noop; } }
+);
+
+
+/***/ }),
+
 /***/ "../node_modules/redux/es/redux.js":
 /*!*****************************************!*\
   !*** ../node_modules/redux/es/redux.js ***!
@@ -24663,6 +24695,142 @@ if ( true && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed
 
 
 
+
+/***/ }),
+
+/***/ "../node_modules/reselect/es/index.js":
+/*!********************************************!*\
+  !*** ../node_modules/reselect/es/index.js ***!
+  \********************************************/
+/*! exports provided: defaultMemoize, createSelectorCreator, createSelector, createStructuredSelector */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultMemoize", function() { return defaultMemoize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelectorCreator", function() { return createSelectorCreator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelector", function() { return createSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createStructuredSelector", function() { return createStructuredSelector; });
+function defaultEqualityCheck(a, b) {
+  return a === b;
+}
+
+function areArgumentsShallowlyEqual(equalityCheck, prev, next) {
+  if (prev === null || next === null || prev.length !== next.length) {
+    return false;
+  }
+
+  // Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
+  var length = prev.length;
+  for (var i = 0; i < length; i++) {
+    if (!equalityCheck(prev[i], next[i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function defaultMemoize(func) {
+  var equalityCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityCheck;
+
+  var lastArgs = null;
+  var lastResult = null;
+  // we reference arguments instead of spreading them for performance reasons
+  return function () {
+    if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
+      // apply arguments instead of spreading for performance.
+      lastResult = func.apply(null, arguments);
+    }
+
+    lastArgs = arguments;
+    return lastResult;
+  };
+}
+
+function getDependencies(funcs) {
+  var dependencies = Array.isArray(funcs[0]) ? funcs[0] : funcs;
+
+  if (!dependencies.every(function (dep) {
+    return typeof dep === 'function';
+  })) {
+    var dependencyTypes = dependencies.map(function (dep) {
+      return typeof dep;
+    }).join(', ');
+    throw new Error('Selector creators expect all input-selectors to be functions, ' + ('instead received the following types: [' + dependencyTypes + ']'));
+  }
+
+  return dependencies;
+}
+
+function createSelectorCreator(memoize) {
+  for (var _len = arguments.length, memoizeOptions = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    memoizeOptions[_key - 1] = arguments[_key];
+  }
+
+  return function () {
+    for (var _len2 = arguments.length, funcs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      funcs[_key2] = arguments[_key2];
+    }
+
+    var recomputations = 0;
+    var resultFunc = funcs.pop();
+    var dependencies = getDependencies(funcs);
+
+    var memoizedResultFunc = memoize.apply(undefined, [function () {
+      recomputations++;
+      // apply arguments instead of spreading for performance.
+      return resultFunc.apply(null, arguments);
+    }].concat(memoizeOptions));
+
+    // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
+    var selector = memoize(function () {
+      var params = [];
+      var length = dependencies.length;
+
+      for (var i = 0; i < length; i++) {
+        // apply arguments instead of spreading and mutate a local list of params for performance.
+        params.push(dependencies[i].apply(null, arguments));
+      }
+
+      // apply arguments instead of spreading for performance.
+      return memoizedResultFunc.apply(null, params);
+    });
+
+    selector.resultFunc = resultFunc;
+    selector.dependencies = dependencies;
+    selector.recomputations = function () {
+      return recomputations;
+    };
+    selector.resetRecomputations = function () {
+      return recomputations = 0;
+    };
+    return selector;
+  };
+}
+
+var createSelector = createSelectorCreator(defaultMemoize);
+
+function createStructuredSelector(selectors) {
+  var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
+
+  if (typeof selectors !== 'object') {
+    throw new Error('createStructuredSelector expects first argument to be an object ' + ('where each property is a selector, instead received a ' + typeof selectors));
+  }
+  var objectKeys = Object.keys(selectors);
+  return selectorCreator(objectKeys.map(function (key) {
+    return selectors[key];
+  }), function () {
+    for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      values[_key3] = arguments[_key3];
+    }
+
+    return values.reduce(function (composition, value, index) {
+      composition[objectKeys[index]] = value;
+      return composition;
+    }, {});
+  });
+}
 
 /***/ }),
 
@@ -25922,14 +26090,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "../node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./store.js");
+/* harmony import */ var _redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./redux */ "./redux/index.js");
 /* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/App */ "./components/App.js");
 
 
 
 
 
-var store = Object(_store__WEBPACK_IMPORTED_MODULE_3__["default"])(window.REDUX_DATA);
+var store = Object(_redux__WEBPACK_IMPORTED_MODULE_3__["default"])(window.REDUX_DATA);
 window.store = store;
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.hydrate(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
   store: store
@@ -25949,6 +26117,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "../node_modules/react-redux/es/index.js");
+/* harmony import */ var _ducks_notification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ducks/notification */ "./ducks/notification.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25972,6 +26141,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var App =
 /*#__PURE__*/
 function (_Component) {
@@ -25991,7 +26161,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(App)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      title: 'World'
+      title: 'Hello World'
     });
 
     return _this;
@@ -26000,57 +26170,144 @@ function (_Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello ", this.state.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.message));
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "[STATE]: ", this.state.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "[PROPS]: ", this.props.message), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this2.props.addMessage('CHANGE MESSAGE');
+        }
+      }, "ADD MESSAGE"));
     }
   }]);
 
   return App;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-var mapStateToProps = function mapStateToProps(state) {
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(function (state) {
   return {
-    message: state.session.message
+    message: Object(_ducks_notification__WEBPACK_IMPORTED_MODULE_2__["messageSelector"])(state)
   };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(App));
+}, {
+  addMessage: _ducks_notification__WEBPACK_IMPORTED_MODULE_2__["addMessage"]
+})(App));
 
 /***/ }),
 
-/***/ "./store.js":
-/*!******************!*\
-  !*** ./store.js ***!
-  \******************/
+/***/ "./ducks/notification.js":
+/*!*******************************!*\
+  !*** ./ducks/notification.js ***!
+  \*******************************/
+/*! exports provided: moduleName, ADD_MESSAGE, default, stateSelector, messageSelector, addMessage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moduleName", function() { return moduleName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_MESSAGE", function() { return ADD_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return reducer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stateSelector", function() { return stateSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "messageSelector", function() { return messageSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addMessage", function() { return addMessage; });
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "../node_modules/reselect/es/index.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+/**
+ * Constants
+ * */
+
+var moduleName = 'notification';
+var prefix = "SSR/".concat(moduleName);
+var ADD_MESSAGE = "".concat(prefix, "/ADD_MESSAGE");
+/**
+ * Reducer
+ * */
+
+var initialState = {
+  message: 'Hello Redux Ducks'
+};
+function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  var type = action.type,
+      payload = action.payload;
+
+  switch (type) {
+    case ADD_MESSAGE:
+      return _objectSpread({}, state, {
+        message: payload.message
+      });
+
+    default:
+      return state;
+  }
+}
+/**
+ * Selectors
+ * */
+
+var stateSelector = function stateSelector(state) {
+  return state[moduleName];
+};
+var messageSelector = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(stateSelector, function (state) {
+  return state.message;
+});
+/**
+ * Action Creators
+ * */
+
+var addMessage = function addMessage(message) {
+  return {
+    type: ADD_MESSAGE,
+    payload: {
+      message: message
+    }
+  };
+};
+
+/***/ }),
+
+/***/ "./redux/index.js":
+/*!************************!*\
+  !*** ./redux/index.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "../node_modules/redux/es/redux.js");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-devtools-extension */ "../node_modules/redux-devtools-extension/index.js");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducer */ "./redux/reducer.js");
 
-var initialState = {
-  message: 'Hello Redux'
-};
 
-var sessionReducer = function sessionReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
 
-  switch (action.type) {
-    case 'INITIALIZE_SESSION':
-      return true;
-
-    default:
-      return state;
-  }
-};
-
-var reducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  session: sessionReducer
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducer__WEBPACK_IMPORTED_MODULE_2__["default"], initialState, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__["composeWithDevTools"])());
 });
-/* harmony default export */ __webpack_exports__["default"] = (function (initialState) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, initialState);
-});
+
+/***/ }),
+
+/***/ "./redux/reducer.js":
+/*!**************************!*\
+  !*** ./redux/reducer.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "../node_modules/redux/es/redux.js");
+/* harmony import */ var _ducks_notification__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ducks/notification */ "./ducks/notification.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(_defineProperty({}, _ducks_notification__WEBPACK_IMPORTED_MODULE_1__["moduleName"], _ducks_notification__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ })
 

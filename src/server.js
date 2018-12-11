@@ -4,6 +4,7 @@ import express from 'express';
 import path from 'path';
 import { Provider as ReduxProvider } from 'react-redux';
 import createStore from './redux';
+import { StaticRouter } from 'react-router-dom';
 import App from './components/App';
 
 const app = express();
@@ -13,10 +14,13 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 app.get('/*', (req, res) => {
   const store = createStore();
   const reduxState = store.getState();
+  const context = {};
 
   const appString = renderToString(
     <ReduxProvider store={store}>
-      <App />
+      <StaticRouter context={context} location={req.url}>
+        <App />
+      </StaticRouter>
     </ReduxProvider>,
   );
 

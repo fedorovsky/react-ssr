@@ -5,10 +5,7 @@ module.exports = {
   context: path.join(__dirname, 'src'),
   devtool: 'source-map',
   entry: {
-    app: './client.js',
-  },
-  resolve: {
-    modules: [path.resolve('./src'), 'node_modules'],
+    app: path.resolve(__dirname, 'src/client.js'),
   },
   module: {
     rules: [

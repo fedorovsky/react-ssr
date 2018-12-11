@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 
 class App extends Component {
+  state = {
+    title: 'World',
+  };
+
   render() {
-    return <div>Hello</div>;
+    return <div>Hello {this.state.title}</div>;
   }
 }
 

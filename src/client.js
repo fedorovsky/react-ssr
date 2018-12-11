@@ -1,6 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider as ReduxProvider } from 'react-redux';
+import createStore from './store';
 
 import App from './components/App';
 
-ReactDOM.hydrate(<App />, document.getElementById('app'));
+const store = createStore(window.REDUX_DATA);
+window.store = store;
+
+ReactDOM.hydrate(
+  <ReduxProvider store={store}>
+    <App />
+  </ReduxProvider>,
+  document.getElementById('app'),
+);

@@ -4,7 +4,11 @@ import express from 'express';
 import path from 'path';
 import { Provider as ReduxProvider } from 'react-redux';
 import createStore from './redux';
+
 import { StaticRouter } from 'react-router-dom';
+import { matchRoutes, renderRoutes } from 'react-router-config';
+import routes from './routes';
+
 import App from './components/App';
 
 const app = express();
@@ -12,26 +16,35 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get('/*', (req, res) => {
+  const branch = matchRoutes(routes, req.url);
+  const promises = branch.map(({ route }) => {
+    let fetchData = route.component.fetchData;
+    return fetchData instanceof Function
+      ? fetchData(store)
+      : Promise.resolve(null);
+  });
+
   const store = createStore();
   const reduxState = store.getState();
-  const context = {};
 
-  const appString = renderToString(
-    <ReduxProvider store={store}>
-      <StaticRouter context={context} location={req.url}>
-        <App />
-      </StaticRouter>
-    </ReduxProvider>,
-  );
-
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(
-    template({
-      title: 'React SSR',
-      body: appString,
-      reduxState: reduxState,
-    }),
-  );
+  return Promise.all(promises).then(data => {
+    let context = {};
+    const appString = renderToString(
+      <ReduxProvider store={store}>
+        <StaticRouter context={context} location={req.url}>
+          {renderRoutes(routes)}
+        </StaticRouter>
+      </ReduxProvider>,
+    );
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(
+      template({
+        title: 'React SSR',
+        body: appString,
+        reduxState: reduxState,
+      }),
+    );
+  });
 });
 
 app.listen(2048);

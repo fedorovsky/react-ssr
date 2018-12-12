@@ -10,11 +10,11 @@ class Home extends Component {
   };
 
   componentWillMount() {
-    console.log('componentWillMount');
+    console.log('[componentWillMount] Home');
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    console.log('[componentDidMount] Home');
   }
 
   render() {

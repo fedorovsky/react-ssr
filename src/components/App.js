@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 import { messageSelector, addMessage } from '../ducks/notification';
-
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
 
 class App extends Component {
   state = {
@@ -22,11 +19,9 @@ class App extends Component {
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
         </div>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" exact component={About} />
-          <Route path="/contact" exact component={Contact} />
-        </Switch>
+
+        {/* RENDER ROUTES */}
+        <div>{renderRoutes(this.props.route.routes)}</div>
       </div>
     );
   }

@@ -4,8 +4,8 @@ import { createSelector } from 'reselect';
  * Constants
  * */
 export const moduleName = 'notification';
-const prefix = `SSR/${moduleName}`;
-export const ADD_MESSAGE = `${prefix}/ADD_MESSAGE`;
+const prefix = `@ssr/${moduleName}`;
+export const ADD_MESSAGE = `${prefix}/message/add`;
 
 /**
  * Reducer

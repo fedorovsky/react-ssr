@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
-import { messageSelector, addMessage } from '../ducks/notification';
+import { messageSelector, addMessage } from '../modules/notification';
 
 class Home extends Component {
   state = {

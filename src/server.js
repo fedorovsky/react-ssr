@@ -17,15 +17,14 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get('/*', (req, res) => {
   const branch = matchRoutes(routes, req.url);
+  const store = createStore();
+
   const promises = branch.map(({ route }) => {
     let fetchData = route.component.fetchData;
     return fetchData instanceof Function
       ? fetchData(store)
       : Promise.resolve(null);
   });
-
-  const store = createStore();
-  const reduxState = store.getState();
 
   return Promise.all(promises).then(data => {
     let context = {};
@@ -41,7 +40,7 @@ app.get('/*', (req, res) => {
       template({
         title: 'React SSR',
         body: appString,
-        reduxState: reduxState,
+        reduxState: store.getState(),
       }),
     );
   });

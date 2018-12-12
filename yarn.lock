@@ -923,7 +923,7 @@ babel-loader@^8.0.4:
     mkdirp "^0.5.1"
     util.promisify "^1.0.0"
 
-"babel-plugin-styled-components@>= 1":
+"babel-plugin-styled-components@>= 1", babel-plugin-styled-components@^1.9.4:
   version "1.9.4"
   resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.9.4.tgz#5f2c34d31237c6ee1e86453cc5fa488b97136669"
   dependencies:
@@ -3939,6 +3939,10 @@ styled-components@^4.1.2:
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
+
+styled-normalize@^8.0.4:
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/styled-normalize/-/styled-normalize-8.0.4.tgz#6a0885dc16c61d88813dab8f5137da928fe0c947"
 
 stylis-rule-sheet@^0.0.10:
   version "0.0.10"

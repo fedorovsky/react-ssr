@@ -14,7 +14,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    console.log('[componentDidMount] Home');
+    console.log('[componentDidMount] Home', this.props);
   }
 
   render() {

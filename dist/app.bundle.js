@@ -23543,7 +23543,7 @@ function renderRoutes(routes, extraProps, switchProps) {
 /*!****************************************************************!*\
   !*** ../node_modules/react-router-dom/esm/react-router-dom.js ***!
   \****************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30095,7 +30095,7 @@ function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log('[componentDidMount] Home');
+      console.log('[componentDidMount] Home', this.props);
     }
   }, {
     key: "render",
@@ -30120,6 +30120,39 @@ function (_Component) {
 }, {
   addMessage: _modules_notification__WEBPACK_IMPORTED_MODULE_3__["addMessage"]
 })(Home));
+
+/***/ }),
+
+/***/ "./components/NotFound.js":
+/*!********************************!*\
+  !*** ./components/NotFound.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "../node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var NotFound = function NotFound() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    render: function render(_ref) {
+      var staticContext = _ref.staticContext;
+
+      if (staticContext) {
+        staticContext.status = 404;
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "404 : Not Found"));
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NotFound);
 
 /***/ }),
 
@@ -30433,6 +30466,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Home */ "./components/Home.js");
 /* harmony import */ var _components_About__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/About */ "./components/About.js");
 /* harmony import */ var _components_Users__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Users */ "./components/Users.js");
+/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/NotFound */ "./components/NotFound.js");
+
 
 
 
@@ -30454,7 +30489,7 @@ var routes = [{
     component: _components_Users__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '*',
-    component: _components_Home__WEBPACK_IMPORTED_MODULE_1__["default"]
+    component: _components_NotFound__WEBPACK_IMPORTED_MODULE_4__["default"]
   }]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

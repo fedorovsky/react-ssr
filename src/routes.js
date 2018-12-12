@@ -2,6 +2,7 @@ import App from './components/App';
 import Home from './components/Home';
 import About from './components/About';
 import Users from './components/Users';
+import NotFound from './components/NotFound';
 
 const routes = [
   {
@@ -13,7 +14,7 @@ const routes = [
       { path: '/users', component: Users },
       {
         path: '*',
-        component: Home,
+        component: NotFound,
       },
     ],
   },

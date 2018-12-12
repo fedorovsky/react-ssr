@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { messageSelector, addMessage } from '../ducks/notification';
+import { Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 
 class App extends Component {
   state = {
@@ -10,19 +12,18 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h2>[STATE]: {this.state.title}</h2>
-        <h2>[PROPS]: {this.props.message}</h2>
-        <button onClick={() => this.props.addMessage('CHANGE MESSAGE')}>
-          ADD MESSAGE
-        </button>
+        <h1>APP</h1>
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/users">Users</Link>
+        </div>
+
+        {/* RENDER ROUTES */}
+        <div>{renderRoutes(this.props.route.routes)}</div>
       </div>
     );
   }
 }
 
-export default connect(
-  state => ({
-    message: messageSelector(state),
-  }),
-  { addMessage },
-)(App);
+export default App;

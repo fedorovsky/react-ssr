@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import notificationsReducer, {
-  moduleName as notificationsModule,
-} from '../ducks/notification';
+import notificationReducer, {
+  moduleName as notificationModule,
+} from '../modules/notification';
+import usersReducer, { moduleName as usersModule } from '../modules/users';
 
 export default combineReducers({
-  [notificationsModule]: notificationsReducer,
+  [usersModule]: usersReducer,
+  [notificationModule]: notificationReducer,
 });

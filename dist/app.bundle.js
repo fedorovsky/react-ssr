@@ -33065,7 +33065,9 @@ var About = function About(props) {
     to: "/about/first"
   }, "Nested First"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StyledLink, {
     to: "/about/second"
-  }, "Nested Second")), Object(react_router_config__WEBPACK_IMPORTED_MODULE_1__["renderRoutes"])(props.route.routes));
+  }, "Nested Second")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/public/img/img.png"
+  }), Object(react_router_config__WEBPACK_IMPORTED_MODULE_1__["renderRoutes"])(props.route.routes));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (About);

@@ -25,6 +25,8 @@ const About = props => {
         <StyledLink to="/about/first">Nested First</StyledLink>
         <StyledLink to="/about/second">Nested Second</StyledLink>
       </div>
+      {/* IMG EXAMPLE */}
+      <img src="/public/img/img.png" />
       {/* RENDER NESTED ROUTES /about/... */}
       {renderRoutes(props.route.routes)}
     </div>

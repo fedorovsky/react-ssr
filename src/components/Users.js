@@ -4,11 +4,8 @@ import { connect } from 'react-redux';
 import { userListSelector, fetchUsers } from '../modules/users';
 
 class Users extends Component {
-  /**
-   * Статический метод, который вызывается на сервере
-   * и записывает данные в стор
-   */
   static fetchData(store) {
+    console.log('[SERVER LOAD]', store.dispatch(fetchUsers()));
     return store.dispatch(fetchUsers());
   }
 

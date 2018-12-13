@@ -10,6 +10,8 @@ import { ServerStyleSheet } from 'styled-components';
 import createStore from './redux';
 import routes from './routes';
 
+const PORT = process.env.PORT || 2048;
+
 const app = express();
 
 app.use(logger('dev'));
@@ -58,7 +60,9 @@ app.get('/*', (req, res) => {
   });
 });
 
-app.listen(process.env.PORT || 2048);
+app.listen(PORT, () => {
+  console.log(`[PORT: ${PORT}]`);
+});
 
 function template({ body, title, reduxState, styles }) {
   return `

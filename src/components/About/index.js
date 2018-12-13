@@ -17,6 +17,14 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
+const BackgroundImg = styled.div`
+  border: 1px solid red;
+  width: 100px;
+  height: 100px;
+  background: url('/public/img/img.png') center center no-repeat #ccc;
+  background-size: contain;
+`;
+
 const About = props => {
   return (
     <div>
@@ -25,6 +33,9 @@ const About = props => {
         <StyledLink to="/about/first">Nested First</StyledLink>
         <StyledLink to="/about/second">Nested Second</StyledLink>
       </div>
+      {/* IMG EXAMPLE */}
+      <img src="/public/img/img.png" />
+      <BackgroundImg />
       {/* RENDER NESTED ROUTES /about/... */}
       {renderRoutes(props.route.routes)}
     </div>

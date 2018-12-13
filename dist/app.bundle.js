@@ -33059,13 +33059,19 @@ var StyledLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["default"
   displayName: "About__StyledLink",
   componentId: "n16z7g-0"
 })(["color:blue;display:block;margin:0.5em 0;font-family:Helvetica,Arial,sans-serif;&:hover{text-decoration:underline;}&.active{color:red;}"]);
+var BackgroundImg = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "About__BackgroundImg",
+  componentId: "n16z7g-1"
+})(["border:1px solid red;width:100px;height:100px;background:url('/public/img/img.png') center center no-repeat #ccc;background-size:contain;"]);
 
 var About = function About(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StyledLink, {
     to: "/about/first"
   }, "Nested First"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StyledLink, {
     to: "/about/second"
-  }, "Nested Second")), Object(react_router_config__WEBPACK_IMPORTED_MODULE_1__["renderRoutes"])(props.route.routes));
+  }, "Nested Second")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/public/img/img.png"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BackgroundImg, null), Object(react_router_config__WEBPACK_IMPORTED_MODULE_1__["renderRoutes"])(props.route.routes));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (About);

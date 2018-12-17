@@ -4,13 +4,15 @@ import express from 'express';
 import path from 'path';
 import { Provider as ReduxProvider } from 'react-redux';
 import logger from 'morgan';
+import ip from 'ip';
+import colors from 'colors';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes, renderRoutes } from 'react-router-config';
 import { ServerStyleSheet } from 'styled-components';
 import createStore from './redux';
 import routes from './routes';
 
-const PORT = process.env.PORT || 2048;
+const PORT = process.env.PORT || 8000;
 
 const app = express();
 
@@ -62,7 +64,7 @@ app.get('/*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`[PORT: ${PORT}]`);
+  console.log(`[SERVER] [http://${ip.address()}:${PORT}]`.green);
 });
 
 function template({ body, title, reduxState, styles }) {

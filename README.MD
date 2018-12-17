@@ -5,6 +5,6 @@
 - router 4
 
 ```yarn install```  
-```yarn dev```
+```yarn start```
 
-http://localhost:2048
+http://localhost:8000

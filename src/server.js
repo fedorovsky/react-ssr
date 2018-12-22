@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
+import cors from 'cors';
 import path from 'path';
 import { Provider as ReduxProvider } from 'react-redux';
 import logger from 'morgan';
@@ -16,6 +17,7 @@ const PORT = process.env.PORT || 8000;
 
 const app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.static(path.resolve(__dirname, '../dist')));
 app.use('/public', express.static(path.resolve(__dirname, '../public')));

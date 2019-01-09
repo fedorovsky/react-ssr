@@ -4,10 +4,9 @@ import { createSelector } from 'reselect';
 /**
  * Constants
  * */
-export const moduleName = 'users';
-export const prefix = `@ssr/${moduleName}`;
-
-export const USERS_LOADED = `${prefix}/users/loaded`;
+export const PREFIX = `@ssr`;
+export const MODULE_NAME = 'users';
+export const USERS_LOADED = `${PREFIX}/${MODULE_NAME}/users/loaded`;
 
 /**
  * Reducer
@@ -33,7 +32,7 @@ export default (state = initialState, action) => {
 /**
  * Selectors
  * */
-export const stateSelector = state => state[moduleName];
+export const stateSelector = state => state[MODULE_NAME];
 export const userListSelector = createSelector(
   stateSelector,
   state => state.items,

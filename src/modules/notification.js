@@ -3,9 +3,9 @@ import { createSelector } from 'reselect';
 /**
  * Constants
  * */
-export const moduleName = 'notification';
-const prefix = `@ssr/${moduleName}`;
-export const ADD_MESSAGE = `${prefix}/message/add`;
+export const PREFIX = `@ssr`;
+export const MODULE_NAME = 'notification';
+export const ADD_MESSAGE = `${PREFIX}/${MODULE_NAME}/message/add`;
 
 /**
  * Reducer
@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
 /**
  * Selectors
  * */
-export const stateSelector = state => state[moduleName];
+export const stateSelector = state => state[MODULE_NAME];
 export const messageSelector = createSelector(
   stateSelector,
   state => state.message,

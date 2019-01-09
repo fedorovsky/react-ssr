@@ -10,6 +10,7 @@ import colors from 'colors';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes, renderRoutes } from 'react-router-config';
 import { ServerStyleSheet } from 'styled-components';
+import Helmet from 'react-helmet';
 import createStore from './redux';
 import routes from './routes';
 
@@ -56,10 +57,10 @@ app.get('/*', (req, res) => {
 
     res.end(
       template({
-        title: 'React SSR',
         body: appString,
         styles: sheet.getStyleTags(),
         reduxState: store.getState(),
+        helmetData: Helmet.renderStatic(),
       }),
     );
   });
@@ -69,13 +70,14 @@ app.listen(PORT, () => {
   console.log(`[SERVER] [http://${ip.address()}:${PORT}]`.green);
 });
 
-function template({ body, title, reduxState, styles }) {
+function template({ body, reduxState, helmetData, styles }) {
   return `
         <!DOCTYPE html>
         <html>
           <head>
               <meta charset="utf-8">
-              <title>${title}</title>
+              ${helmetData.title.toString()}
+              ${helmetData.meta.toString()}
               ${styles}
           </head>
           <body>

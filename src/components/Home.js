@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
@@ -28,15 +29,20 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Home page</h2>
-        <h2>[STATE]: {this.state.title}</h2>
-        <h2>[PROPS]: {this.props.message}</h2>
-        <button onClick={() => this.props.addMessage('CHANGE MESSAGE')}>
-          ADD MESSAGE
-        </button>
-        <Container />
-      </div>
+      <Fragment>
+        <Helmet>
+          <title>Home page</title>
+        </Helmet>
+        <div>
+          <h2>Home page</h2>
+          <h2>[STATE]: {this.state.title}</h2>
+          <h2>[PROPS]: {this.props.message}</h2>
+          <button onClick={() => this.props.addMessage('CHANGE MESSAGE')}>
+            ADD MESSAGE
+          </button>
+          <Container />
+        </div>
+      </Fragment>
     );
   }
 }

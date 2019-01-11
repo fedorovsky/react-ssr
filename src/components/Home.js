@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
+import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
+import withPageTitle from '../hoc/withPageTitle';
 import { messageSelector, addMessage } from '../modules/notification';
 
 const Container = styled.div`
@@ -29,27 +30,27 @@ class Home extends Component {
 
   render() {
     return (
-      <Fragment>
-        <Helmet>
-          <title>Home page</title>
-        </Helmet>
-        <div>
-          <h2>Home page</h2>
-          <h2>[STATE]: {this.state.title}</h2>
-          <h2>[PROPS]: {this.props.message}</h2>
-          <button onClick={() => this.props.addMessage('CHANGE MESSAGE')}>
-            ADD MESSAGE
-          </button>
-          <Container />
-        </div>
-      </Fragment>
+      <div>
+        <h2>Home page</h2>
+        <h2>[STATE]: {this.state.title}</h2>
+        <h2>[PROPS]: {this.props.message}</h2>
+        <button onClick={() => this.props.addMessage('CHANGE MESSAGE')}>
+          ADD MESSAGE
+        </button>
+        <Container />
+      </div>
     );
   }
 }
 
-export default connect(
-  state => ({
-    message: messageSelector(state),
-  }),
-  { addMessage },
-)(Home);
+const composedHoc = compose(
+  withPageTitle('Home'),
+  connect(
+    state => ({
+      message: messageSelector(state),
+    }),
+    { addMessage },
+  ),
+);
+
+export default composedHoc(Home);

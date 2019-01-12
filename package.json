@@ -1,14 +1,35 @@
 {
   "name": "react-ssr",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:fedorovsky/react-ssr.git",
-  "author": "Anton Fedorovskyi <a.fedorovskyi@plarium.com>",
   "license": "MIT",
+  "author": "Anton Fedorovskyi <a.fedorovskyi@plarium.com>",
+  "main": "index.js",
   "scripts": {
-    "start": "npm-run-all --parallel server client",
+    "client": "webpack --config webpack.development.js --watch --progress",
     "server": "nodemon index.js",
-    "client": "webpack --config webpack.development.js --watch --progress"
+    "start": "npm-run-all --parallel server client"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/plugin-transform-async-to-generator": "^7.2.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "babel-plugin-styled-components": "^1.9.4",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-helmet": "^5.2.0",
+    "react-redux": "^6.0.0",
+    "react-router-config": "^4.4.0-beta.6",
+    "react-router-dom": "^4.4.0-beta.6",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "styled-components": "^4.1.2",
+    "styled-normalize": "^8.0.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -29,21 +50,5 @@
     "redux-devtools-extension": "^2.13.7",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
-  },
-  "dependencies": {
-    "babel-plugin-styled-components": "^1.9.4",
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-helmet": "^5.2.0",
-    "react-redux": "^6.0.0",
-    "react-router-config": "^4.4.0-beta.6",
-    "react-router-dom": "^4.4.0-beta.6",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0",
-    "styled-components": "^4.1.2",
-    "styled-normalize": "^8.0.4"
   }
 }

@@ -1,10 +1,11 @@
 ## react-ssr-boilerplate
 
-- react
-- redux
-- router 4
+* React
+* [Redux](https://github.com/reduxjs/react-redux)
+* [Router 4](https://reacttraining.com/react-router/core/guides/philosophy)
+* [Styled Components](https://www.styled-components.com/)
 
 ```yarn install```  
 ```yarn start```
 
-http://localhost:8000
+The application will start at: ```http://localhost:8000```  

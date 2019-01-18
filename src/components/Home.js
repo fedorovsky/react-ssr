@@ -34,7 +34,7 @@ class Home extends Component {
         <h2>Home page</h2>
         <h2>[STATE]: {this.state.title}</h2>
         <h2>[PROPS]: {this.props.message}</h2>
-        <button onClick={() => this.props.addMessage('CHANGE MESSAGE')}>
+        <button onClick={() => this.props.addMessage('CHANGE MESSAGE REDUX')}>
           ADD MESSAGE
         </button>
         <Container />

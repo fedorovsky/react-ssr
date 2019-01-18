@@ -23,16 +23,13 @@ const StyledLink = styled(NavLink)`
 `;
 
 class App extends Component {
-  state = {
-    title: 'Hello World',
-  };
-
   render() {
     return (
       <Fragment>
         <NormalizeStyle />
-
         <h1>APP</h1>
+        
+        {/*NAVIGATION*/}
         <div>
           <StyledLink exact to="/">
             Index

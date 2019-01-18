@@ -13,8 +13,10 @@ import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
 import createStore from './redux';
 import routes from './routes';
+import dotenv from 'dotenv';
 
-const PORT = process.env.PORT || 8000;
+/* process.env -> .env */
+dotenv.config();
 
 const app = express();
 
@@ -66,8 +68,8 @@ app.get('/*', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`[SERVER] [http://${ip.address()}:${PORT}]`.green);
+app.listen(process.env.PORT , () => {
+  console.log(colors.green(`[SERVER] [http://${ip.address()}:${process.env.PORT }]`));
 });
 
 function template({ body, reduxState, helmetData, styles }) {

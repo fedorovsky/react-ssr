@@ -1,7 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Route, Switch } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import styledNormalize from 'styled-normalize';
 import styled, { createGlobalStyle } from 'styled-components';

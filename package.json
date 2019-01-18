@@ -10,7 +10,7 @@
     "server": "nodemon index.js",
     "start": "npm-run-all --parallel server client"
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.2.1",

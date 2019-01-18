@@ -6,7 +6,7 @@
   "author": "Anton Fedorovskyi <a.fedorovskyi@plarium.com>",
   "main": "index.js",
   "scripts": {
-    "client": "webpack --config webpack.development.js --watch --progress",
+    "client": "webpack --config webpack.development.js --watch",
     "server": "nodemon index.js",
     "start": "npm-run-all --parallel server client"
   },

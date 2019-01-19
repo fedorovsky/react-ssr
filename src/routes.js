@@ -1,11 +1,11 @@
 import App from './components/App';
-import Home from './components/Home';
-import Users from './components/Users';
-import NotFound from './components/NotFound';
+import Home from './pages/Home';
+import Users from './pages/Users';
+import NotFound from './pages/NotFound';
 
-import About from './components/About';
-import NestedFirst from './components/About/NestedFirst';
-import NestedSecond from './components/About/NestedSecond';
+import About from './pages/About';
+import NestedFirst from './pages/About/NestedFirst';
+import NestedSecond from './pages/About/NestedSecond';
 
 const routes = [
   {

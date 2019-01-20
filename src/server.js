@@ -68,8 +68,10 @@ app.get('/*', (req, res) => {
   });
 });
 
-app.listen(process.env.PORT , () => {
-  console.log(colors.green(`[SERVER] [http://${ip.address()}:${process.env.PORT }]`));
+app.listen(process.env.PORT, () => {
+  console.log(
+    colors.green(`[SERVER] [http://${ip.address()}:${process.env.PORT}]`),
+  );
 });
 
 function template({ body, reduxState, helmetData, styles }) {
@@ -78,6 +80,8 @@ function template({ body, reduxState, helmetData, styles }) {
         <html>
           <head>
               <meta charset="utf-8">
+              <meta name="description" content="">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
               ${helmetData.title.toString()}
               ${helmetData.meta.toString()}
               ${styles}

@@ -26,7 +26,7 @@ class App extends Component {
       <Fragment>
         <NormalizeStyle />
         <h1>APP</h1>
-        
+
         {/*NAVIGATION*/}
         <div>
           <StyledLink exact to="/">

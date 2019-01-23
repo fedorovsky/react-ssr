@@ -68,8 +68,10 @@ app.get('/*', (req, res) => {
   });
 });
 
-app.listen(process.env.PORT , () => {
-  console.log(colors.green(`[SERVER] [http://${ip.address()}:${process.env.PORT }]`));
+app.listen(process.env.PORT, () => {
+  console.log(
+    colors.green(`[SERVER] [http://${ip.address()}:${process.env.PORT}]`),
+  );
 });
 
 function template({ body, reduxState, helmetData, styles }) {

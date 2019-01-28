@@ -1,4 +1,6 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -14,11 +16,25 @@ module.exports = {
         exclude: /node_modules/,
         use: [{ loader: 'babel-loader' }],
       },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+        ],
+      },
     ],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
   },
-  plugins: [],
+  plugins: [
+    new CleanWebpackPlugin('dist', {}),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
+  ],
 };

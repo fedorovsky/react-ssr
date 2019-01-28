@@ -85,6 +85,7 @@ function template({ body, reduxState, helmetData, styles }) {
               ${helmetData.title.toString()}
               ${helmetData.meta.toString()}
               ${styles}
+              <link rel="stylesheet" href="./style.css">
           </head>
           <body>
               <div id="app">${body}</div>

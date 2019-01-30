@@ -26,4 +26,13 @@ module.exports = {
       },
     ],
   },
+  stats: {
+    colors: true,
+    modules: false,
+    chunks: false,
+    chunkGroups: false,
+    chunkModules: false,
+    env: true,
+    children: false,
+  },
 };

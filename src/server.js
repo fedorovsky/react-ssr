@@ -85,6 +85,7 @@ function template({ body, reduxState, helmetData, styles }) {
               ${helmetData.title.toString()}
               ${helmetData.meta.toString()}
               ${styles}
+              <link rel="stylesheet" href="/style.css">
           </head>
           <body>
               <div id="app">${body}</div>
@@ -92,7 +93,7 @@ function template({ body, reduxState, helmetData, styles }) {
           <script>
               window.REDUX_DATA = ${JSON.stringify(reduxState)}
           </script>
-          <script src="./app.bundle.js"></script>
+          <script src="/app.bundle.js"></script>
         </html>
     `;
 }

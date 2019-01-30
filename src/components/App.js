@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import styledNormalize from 'styled-normalize';
 import styled, { createGlobalStyle } from 'styled-components';
+import './style.css';
 
 const NormalizeStyle = createGlobalStyle(styledNormalize);
 

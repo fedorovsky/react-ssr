@@ -22,8 +22,8 @@ const app = express();
 
 app.use(cors());
 app.use(logger('dev'));
-app.use(express.static(path.resolve(__dirname, '../dist')));
-app.use('/public', express.static(path.resolve(__dirname, '../public')));
+app.use(express.static(path.resolve('./dist')));
+app.use('/public', express.static('./public'));
 
 app.get('/*', (req, res) => {
   const branch = matchRoutes(routes, req.url);

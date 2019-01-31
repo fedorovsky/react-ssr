@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import './styles.css';
 
 class NestedFirst extends Component {
   render() {
     return (
-      <div>
-        <h2 className="title">Nested First</h2>
-      </div>
+      <React.Fragment>
+        <h2>Nested First</h2>
+      </React.Fragment>
     );
   }
 }

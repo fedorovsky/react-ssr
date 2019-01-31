@@ -18,6 +18,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        include: /src/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -27,6 +28,32 @@ module.exports = {
             options: {
               sourceMap: true,
               importLoaders: 1,
+              modules: true,
+              localIdentName: '[path]-[local]',
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              config: {
+                path: 'postcss.config.js',
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        exclude: /src/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
             },
           },
           {

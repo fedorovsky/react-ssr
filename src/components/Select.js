@@ -20,7 +20,7 @@ export default class extends React.Component {
 
     return (
       <Select
-        id="select"
+        instanceId="select"
         value={selectedOption}
         onChange={this.handleChange}
         options={options}

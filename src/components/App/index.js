@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import styledNormalize from 'styled-normalize';
 import styled, { createGlobalStyle } from 'styled-components';
-import './style.css';
+import Select from '../Select';
+import styles from './style.css';
 
 const NormalizeStyle = createGlobalStyle(styledNormalize);
 
@@ -26,7 +27,8 @@ class App extends Component {
     return (
       <Fragment>
         <NormalizeStyle />
-        <h1>APP</h1>
+        <h1 className={styles.title}>APP</h1>
+        <Select />
 
         {/*NAVIGATION*/}
         <div>

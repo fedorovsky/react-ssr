@@ -6,7 +6,7 @@ module.exports = {
   context: path.join(__dirname, 'src'),
   entry: path.resolve(__dirname, 'src/server.js'),
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx', '.css'],
   },
   target: 'node',
   externals: [nodeExternals()],
@@ -22,7 +22,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: 'css-loader',
+        use: [
+          'isomorphic-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[path]-[local]',
+            },
+          },
+        ],
       },
     ],
   },

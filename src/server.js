@@ -13,12 +13,16 @@ import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
 import createStore from './redux';
 import routes from './routes';
+import reload from 'reload';
 import dotenv from 'dotenv';
 
 /* process.env -> .env */
 dotenv.config();
 
 const app = express();
+
+/* Live Reload Browser  */
+reload(app);
 
 app.use(cors());
 app.use(logger('dev'));
@@ -94,6 +98,7 @@ function template({ body, reduxState, helmetData, styles }) {
               window.REDUX_DATA = ${JSON.stringify(reduxState)}
           </script>
           <script src="/app.bundle.js"></script>
+          <script src="/reload/reload.js"></script>
         </html>
     `;
 }

@@ -54,10 +54,10 @@ app.get('/*', (req, res) => {
       ),
     );
 
-    if (context.status === 404) {
+    if (context.statusCode === 404) {
       res.status(404);
     }
-    if (context.status === 302) {
+    if (context.statusCode === 302) {
       return res.redirect(302, context.url);
     }
 

@@ -6,6 +6,9 @@ module.exports = {
   mode: 'development',
   context: path.join(__dirname, 'src'),
   devtool: 'source-map',
+  resolve: {
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx', '.css'],
+  },
   entry: {
     app: path.resolve(__dirname, 'src/client.js'),
   },
@@ -15,6 +18,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [{ loader: 'babel-loader' }],
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'awesome-typescript-loader',
       },
       {
         test: /\.css$/,

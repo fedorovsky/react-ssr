@@ -4,14 +4,13 @@
     "jsx": "react",
     "module": "commonjs",
     "noImplicitAny": false,
-    "outDir": "./build/",
+    "outDir": "./dist/",
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": true,
     "target": "es5",
-    "allowJs": true,
+    "allowJs": true
   },
-  "include": [
-    "./src/**/**/*"
-  ]
+  "include": ["./src/**/**/*"],
+  "exclude": ["dist", "node_modules"]
 }

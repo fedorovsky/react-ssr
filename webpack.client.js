@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 
 module.exports = {
   mode: 'development',
@@ -81,6 +82,7 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   plugins: [
+    new CheckerPlugin(),
     new CleanWebpackPlugin('dist', {}),
     new MiniCssExtractPlugin({
       filename: 'style.css',

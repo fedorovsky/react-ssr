@@ -10,6 +10,7 @@
     "prettier": "prettier --write \"**/*.js\"",
     "server": "webpack --config webpack.server.js --watch",
     "server:run": "nodemon ./dist/server.js",
+    "retry": "node ./dist/server.js",
     "start": "npm-run-all --parallel server client server:run"
   },
   "husky": {
@@ -70,8 +71,8 @@
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
     "react-redux": "^6.0.0",
-    "react-router-config": "^4.4.0-beta.6",
-    "react-router-dom": "^4.4.0-beta.6",
+    "react-router-config": "4.4.0-beta.6",
+    "react-router-dom": "4.4.0-beta.6",
     "react-select": "^2.3.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.7",

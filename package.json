@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "repository": "git@github.com:fedorovsky/react-ssr.git",
   "license": "MIT",
-  "author": "Anton Fedorovskyi <a.fedorovskyi@plarium.com>",
+  "author": "Anton Fedorovskyi <anton.fedorovsky@gmail.com>",
   "main": "./dist/server.js",
   "scripts": {
     "client": "webpack --config webpack.client.js --watch",
     "prettier": "prettier --write \"**/*.js\"",
     "server": "webpack --config webpack.server.js --watch",
-    "server:run": "nodemon ./dist/server.js",
-    "retry": "node ./dist/server.js",
-    "start": "npm-run-all --parallel server client server:run"
+    "start": "npm-run-all --parallel server client"
   },
   "husky": {
     "hooks": {
@@ -84,7 +82,8 @@
     "typescript": "^3.2.4",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "webpack-shell-plugin": "^0.5.0"
   },
   "devDependencies": {
     "husky": "^1.3.1",

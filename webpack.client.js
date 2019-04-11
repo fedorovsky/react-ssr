@@ -83,7 +83,7 @@ module.exports = {
   },
   plugins: [
     new CheckerPlugin(),
-    new CleanWebpackPlugin('dist', {}),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.css',
     }),

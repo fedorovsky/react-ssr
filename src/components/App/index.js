@@ -30,7 +30,7 @@ class App extends Component {
         <h1 className={styles.title}>APP</h1>
         <Select />
 
-        {/*NAVIGATION*/}
+        {/* NAVIGATION */}
         <div>
           <StyledLink exact to="/">
             Index

@@ -1,7 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const { CheckerPlugin } = require('awesome-typescript-loader');
-const WebpackShellPlugin = require('webpack-shell-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin-next');
 
 module.exports = {
   mode: 'production',
@@ -43,12 +43,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CheckerPlugin(),
-    new WebpackShellPlugin({
-      onBuildEnd: ['node ./dist/server.js'],
-    }),
-  ],
+  plugins: [new CheckerPlugin()],
   stats: {
     colors: true,
     modules: false,

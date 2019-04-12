@@ -7,13 +7,13 @@
   "main": "./dist/server.js",
   "scripts": {
     "build": "npm-run-all --parallel server:prod client:prod",
+    "start": "node ./dist/server.js",
     "client:dev": "webpack --config webpack.client.js --watch",
     "client:prod": "webpack --config webpack.client.prod.js",
-    "heroku-postbuild": "npm run build",
     "prettier": "prettier --write \"**/*.js\"",
     "server:dev": "webpack --config webpack.server.js --watch",
     "server:prod": "webpack --config webpack.server.prod.js",
-    "start": "npm-run-all --parallel server:dev client:dev"
+    "dev": "npm-run-all --parallel server:dev client:dev server:run"
   },
   "husky": {
     "hooks": {
@@ -82,7 +82,8 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-node-externals": "^1.7.2",
-    "webpack-shell-plugin": "^0.5.0"
+    "webpack-shell-plugin": "^0.5.0",
+    "webpack-shell-plugin-next": "^0.6.4"
   },
   "devDependencies": {
     "husky": "^1.3.1",

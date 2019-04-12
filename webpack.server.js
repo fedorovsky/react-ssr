@@ -45,9 +45,9 @@ module.exports = {
   },
   plugins: [
     new CheckerPlugin(),
-    new WebpackShellPlugin({
-      onBuildEnd: ['nodemon ./dist/server.js'],
-    }),
+    // new WebpackShellPlugin({
+    //   onBuildEnd: ['nodemon ./dist/server.js'],
+    // }),
   ],
   stats: {
     colors: true,

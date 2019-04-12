@@ -1,7 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const { CheckerPlugin } = require('awesome-typescript-loader');
-const WebpackShellPlugin = require('webpack-shell-plugin');
 
 module.exports = {
   mode: 'development',
@@ -43,12 +42,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CheckerPlugin(),
-    // new WebpackShellPlugin({
-    //   onBuildEnd: ['nodemon ./dist/server.js'],
-    // }),
-  ],
+  plugins: [new CheckerPlugin()],
   stats: {
     colors: true,
     modules: false,

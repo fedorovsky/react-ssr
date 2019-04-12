@@ -1,6 +1,5 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const { CheckerPlugin } = require('awesome-typescript-loader');
 
 module.exports = {
   mode: 'production',
@@ -42,7 +41,6 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CheckerPlugin()],
   stats: {
     colors: true,
     modules: false,

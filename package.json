@@ -9,6 +9,7 @@
     "build": "npm-run-all --parallel server:prod client:prod",
     "client:dev": "webpack --config webpack.client.js --watch",
     "client:prod": "webpack --config webpack.client.prod.js",
+    "heroku-postbuild": "npm run build",
     "prettier": "prettier --write \"**/*.js\"",
     "server:dev": "webpack --config webpack.server.js --watch",
     "server:prod": "webpack --config webpack.server.prod.js",

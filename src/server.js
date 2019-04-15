@@ -22,7 +22,9 @@ dotenv.config();
 const app = express();
 
 /* Live Reload Browser  */
-reload(app);
+if (process.env.NODE_ENV === 'development') {
+  reload(app);
+}
 
 app.use(cors());
 app.use(logger('dev'));
@@ -76,6 +78,7 @@ app.listen(process.env.PORT, () => {
   console.log(
     colors.green(`[SERVER] [http://${ip.address()}:${process.env.PORT}]`),
   );
+  console.log(colors.green(`[process.env.NODE_ENV] [${process.env.NODE_ENV}]`));
 });
 
 function template({ body, reduxState, helmetData, styles }) {

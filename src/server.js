@@ -19,15 +19,25 @@ import dotenv from 'dotenv';
 /* process.env -> .env */
 dotenv.config();
 
+const isProduction = process.env.NODE_ENV === 'production';
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const app = express();
 
 /* Live Reload Browser  */
-if (process.env.NODE_ENV === 'development') {
+if (isDevelopment) {
   reload(app);
 }
 
+/* Logger morgan */
+if (isDevelopment) {
+  app.use(logger('dev'));
+}
+
+/* CORS */
 app.use(cors());
-app.use(logger('dev'));
+
+/* Static */
 app.use(express.static(path.resolve('./dist')));
 app.use('/public', express.static('./public'));
 
@@ -59,6 +69,7 @@ app.get('/*', (req, res) => {
     if (context.statusCode === 404) {
       res.status(404);
     }
+
     if (context.statusCode === 302) {
       return res.redirect(302, context.url);
     }
@@ -68,7 +79,7 @@ app.get('/*', (req, res) => {
         body: appString,
         styles: sheet.getStyleTags(),
         reduxState: store.getState(),
-        helmetData: Helmet.renderStatic(),
+        helmet: Helmet.renderStatic(),
       }),
     );
   });
@@ -81,7 +92,7 @@ app.listen(process.env.PORT, () => {
   console.log(colors.green(`[process.env.NODE_ENV] [${process.env.NODE_ENV}]`));
 });
 
-function template({ body, reduxState, helmetData, styles }) {
+function template({ body, reduxState, helmet, styles }) {
   return `
         <!DOCTYPE html>
         <html>
@@ -89,8 +100,8 @@ function template({ body, reduxState, helmetData, styles }) {
               <meta charset="utf-8">
               <meta name="description" content="">
               <meta name="viewport" content="width=device-width, initial-scale=1">
-              ${helmetData.title.toString()}
-              ${helmetData.meta.toString()}
+              ${helmet.title.toString()}
+              ${helmet.meta.toString()}
               ${styles}
               <link rel="stylesheet" href="/style.css">
           </head>
@@ -101,7 +112,7 @@ function template({ body, reduxState, helmetData, styles }) {
               window.REDUX_DATA = ${JSON.stringify(reduxState)}
           </script>
           <script src="/app.bundle.js"></script>
-          <script src="/reload/reload.js"></script>
+          ${isDevelopment ? '<script src="/reload/reload.js"></script>' : ''}
         </html>
     `;
 }

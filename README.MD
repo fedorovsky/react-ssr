@@ -6,6 +6,12 @@
 * [Styled Components](https://www.styled-components.com/)
 
 ```yarn install```  
-```yarn start```
+
+| cli              | description                       |
+|------------------|-----------------------------------|
+| ```yarn dev```   | start development build && server |
+| ```yarn build``` | start production build            |
+| ```yarn start``` | start server                      |  
+
 
 The application will start at: ```http://localhost:8000```  

@@ -31,7 +31,11 @@ if (isDevelopment) {
 
 /* Logger morgan */
 if (isDevelopment) {
-  app.use(logger('dev'));
+  app.use(
+    logger(
+      ':method :url :status :response-time ms - :res[content-length] :remote-addr',
+    ),
+  );
 }
 
 /* CORS */

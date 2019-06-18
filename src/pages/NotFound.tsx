@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-const NotFound = (props: RouteComponentProps) => {
+const NotFound: React.FC<RouteComponentProps> = props => {
   if (props.staticContext) {
     props.staticContext.statusCode = 404;
   }

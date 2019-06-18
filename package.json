@@ -79,7 +79,7 @@
     "reselect": "^4.0.0",
     "styled-components": "^4.2.0",
     "styled-normalize": "^8.0.6",
-    "typescript": "^3.4.3",
+    "typescript": "^3.5.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-node-externals": "^1.7.2"

@@ -10,7 +10,7 @@
     "client:dev": "webpack --config webpack.client.js --watch",
     "client:prod": "webpack --config webpack.client.prod.js",
     "dev": "npm-run-all --parallel server:dev client:dev server:run",
-    "prettier": "prettier --write \"**/*.js\"",
+    "prettier": "prettier --write src/**/*.{js,jsx,ts,tsx}",
     "server:dev": "webpack --config webpack.server.js --watch",
     "server:prod": "webpack --config webpack.server.prod.js",
     "server:run": "nodemon ./dist/server.js",

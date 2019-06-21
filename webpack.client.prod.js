@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 
 module.exports = {
@@ -41,7 +40,7 @@ module.exports = {
               sourceMap: true,
               importLoaders: 1,
               modules: true,
-              localIdentName: '[path]-[local]',
+              localsConvention: 'asIs',
             },
           },
           {
@@ -85,7 +84,6 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new CheckerPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.css',

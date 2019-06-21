@@ -35,7 +35,7 @@ module.exports = {
               sourceMap: true,
               modules: true,
               importLoaders: 1,
-              localIdentName: '[path]-[local]',
+              localsConvention: 'asIs',
             },
           },
         ],

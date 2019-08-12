@@ -37,7 +37,7 @@ class App extends Component {
           </StyledLink>
                  <StyledLink to="/home">Home</StyledLink>
              <StyledLink to="/about">About</StyledLink>
-          <StyledLink to="/users">Users</StyledLink>
+                  <StyledLink to="/users">Users</StyledLink>
         </div>
 
         {/* RENDER ROUTES */}

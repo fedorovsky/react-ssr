@@ -93,7 +93,7 @@
   ],
   "lint-staged": {
     "*.js": [
-      "npm run prettier",
+      "npm run prettier --write",
       "git add"
     ]
   }

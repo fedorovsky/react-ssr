@@ -15,3 +15,8 @@
 
 
 The application will start at: ```http://localhost:8000```  
+
+## heroku
+```heroku login```  
+```heroku apps:info --app simple-react-ssr```  
+```heroku logs --tail --app simple-react-ssr```  

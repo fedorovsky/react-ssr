@@ -20,14 +20,6 @@ class Home extends Component {
     title: 'Hello World',
   };
 
-  componentWillMount() {
-    console.log('[componentWillMount] Home');
-  }
-
-  componentDidMount() {
-    console.log('[componentDidMount] Home', this.props);
-  }
-
   render() {
     return (
       <div>

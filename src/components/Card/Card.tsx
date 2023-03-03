@@ -1,8 +1,28 @@
 import * as React from 'react';
+import { userListSelector, fetchUserList } from 'store/slices/usersSlice';
+import useAppSelector from 'hooks/useAppSelector';
+import useAppDispatch from 'hooks/useAppDispatch';
+import * as Styled from './Card.styled';
 
-const Card = () => {
-  console.log('hello')
-  return <div>Card</div>;
+const UserList: React.FC = () => {
+  const userList = useAppSelector(userListSelector);
+  const dispatch = useAppDispatch();
+
+  const handleClick = () => dispatch(fetchUserList());
+
+  return (
+    <Styled.Wrapper>
+      <button type="button" onClick={handleClick}>
+        GET USER LIST
+      </button>
+
+      <ul>
+        {userList.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </Styled.Wrapper>
+  );
 };
 
-export default Card;
+export default UserList;

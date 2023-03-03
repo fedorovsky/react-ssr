@@ -1,17 +1,18 @@
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import express from 'express';
-import cors from 'cors';
-import path from 'path';
-import { Provider as ReduxProvider } from 'react-redux';
-import logger from 'morgan';
-import ip from 'ip';
-import colors from 'colors';
+import * as React from 'react';
+import * as ReactDOMServer from 'react-dom/server';
+import { Provider } from 'react-redux';
 import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
-import createStore from './redux';
-import dotenv from 'dotenv';
+import { initStore } from './store';
 import App from './App';
+
+const ip = require('ip');
+const path = require('path');
+const cors = require('cors');
+const logger = require('morgan');
+const express = require('express');
+const colors = require('colors');
+const dotenv = require('dotenv');
 
 /* process.env -> .env */
 dotenv.config();
@@ -23,11 +24,7 @@ const app = express();
 
 /* Logger morgan */
 if (isDevelopment) {
-  app.use(
-    logger(
-      ':method :url :status :response-time ms',
-    ),
-  );
+  app.use(logger(':method :url :status :response-time ms'));
 }
 
 /* CORS */
@@ -38,14 +35,14 @@ app.use(express.static(path.resolve('./dist')));
 app.use('/public', express.static('./public'));
 
 app.get('*', (req, res) => {
-  const store = createStore();
+  const store = initStore();
   const sheet = new ServerStyleSheet();
 
   const appString = ReactDOMServer.renderToString(
     sheet.collectStyles(
-      <ReduxProvider store={store}>
+      <Provider store={store}>
         <App />
-      </ReduxProvider>,
+      </Provider>,
     ),
   );
 

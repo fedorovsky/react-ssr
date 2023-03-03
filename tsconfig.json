@@ -1,22 +1,21 @@
 {
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": [],
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
+    "allowJs": false,
+    "checkJs": false,
     "jsx": "react",
+    "baseUrl": "./src",
     "module": "commonjs",
-    "noImplicitAny": false,
-    "outDir": "./dist/",
-    "preserveConstEnums": true,
-    "removeComments": true,
     "sourceMap": true,
-    "target": "es6",
-    "lib": ["es5", "es6", "dom"],
-    "allowJs": true
-  },
-  "include": ["./src/**/**/*"],
-  "exclude": ["dist", "node_modules"],
-  "awesomeTypescriptLoaderOptions": {
-    "useBabel": true,
-    "errorsAsWarnings": false,
-    "babelCore": "@babel/core"
+    "target": "ES2018",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
   }
 }

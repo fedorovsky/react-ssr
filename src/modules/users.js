@@ -1,4 +1,3 @@
-import 'isomorphic-fetch';
 import { createSelector } from 'reselect';
 
 /**

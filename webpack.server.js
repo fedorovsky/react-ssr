@@ -1,13 +1,13 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const { CheckerPlugin } = require('awesome-typescript-loader');
+const NodemonPlugin = require('nodemon-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   context: path.join(__dirname, 'src'),
   entry: path.resolve(__dirname, 'src/server.js'),
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx', '.css'],
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
   },
   target: 'node',
   externals: [nodeExternals()],
@@ -23,26 +23,11 @@ module.exports = {
       },
       {
         test: /\.(ts|tsx)$/,
-        loader: 'awesome-typescript-loader',
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'isomorphic-style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: true,
-              importLoaders: 1,
-              localsConvention: 'asIs',
-            },
-          },
-        ],
+        loader: 'ts-loader',
       },
     ],
   },
-  plugins: [new CheckerPlugin()],
+  plugins: [new NodemonPlugin()],
   stats: {
     colors: true,
     modules: false,

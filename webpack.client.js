@@ -5,9 +5,10 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+    modules: ['src', 'node_modules'],
   },
   entry: {
-    app: path.resolve(__dirname, 'src/client.js'),
+    app: path.resolve(__dirname, 'src/client.tsx'),
   },
   output: {
     path: path.resolve(__dirname, './dist'),

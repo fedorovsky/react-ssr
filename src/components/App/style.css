@@ -1,8 +1,0 @@
-.title {
-  font-family: Arial, Helvetica, sans-serif;
-  color: blue;
-
-  &.pages {
-    color: red;
-  }
-}

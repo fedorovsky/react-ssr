@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+import ReactDOMServer from 'react-dom/server';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
@@ -7,14 +7,11 @@ import { Provider as ReduxProvider } from 'react-redux';
 import logger from 'morgan';
 import ip from 'ip';
 import colors from 'colors';
-import { StaticRouter } from 'react-router-dom';
-import { matchRoutes, renderRoutes } from 'react-router-config';
 import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
 import createStore from './redux';
-import routes from './routes';
-import reload from 'reload';
 import dotenv from 'dotenv';
+import App from './App';
 
 /* process.env -> .env */
 dotenv.config();
@@ -24,16 +21,11 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 
 const app = express();
 
-/* Live Reload Browser  */
-if (isDevelopment) {
-  reload(app);
-}
-
 /* Logger morgan */
 if (isDevelopment) {
   app.use(
     logger(
-      ':method :url :status :response-time ms - :res[content-length] :remote-addr',
+      ':method :url :status :response-time ms',
     ),
   );
 }
@@ -45,55 +37,33 @@ app.use(cors());
 app.use(express.static(path.resolve('./dist')));
 app.use('/public', express.static('./public'));
 
-app.get('/*', (req, res) => {
-  const branch = matchRoutes(routes, req.url);
+app.get('*', (req, res) => {
   const store = createStore();
   const sheet = new ServerStyleSheet();
 
-  const promises = branch.map(({ route }) => {
-    let fetchData = route.component.fetchData;
-    return fetchData instanceof Function
-      ? fetchData(store)
-      : Promise.resolve(null);
-  });
+  const appString = ReactDOMServer.renderToString(
+    sheet.collectStyles(
+      <ReduxProvider store={store}>
+        <App />
+      </ReduxProvider>,
+    ),
+  );
 
-  return Promise.all(promises).then(data => {
-    let context = {};
-
-    const appString = renderToString(
-      sheet.collectStyles(
-        <ReduxProvider store={store}>
-          <StaticRouter context={context} location={req.url}>
-            {renderRoutes(routes)}
-          </StaticRouter>
-        </ReduxProvider>,
-      ),
-    );
-
-    if (context.statusCode === 404) {
-      res.status(404);
-    }
-
-    if (context.statusCode === 302) {
-      return res.redirect(302, context.url);
-    }
-
-    res.end(
-      template({
-        body: appString,
-        styles: sheet.getStyleTags(),
-        reduxState: store.getState(),
-        helmet: Helmet.renderStatic(),
-      }),
-    );
-  });
+  res.end(
+    template({
+      body: appString,
+      styles: sheet.getStyleTags(),
+      reduxState: store.getState(),
+      helmet: Helmet.renderStatic(),
+    }),
+  );
 });
 
 app.listen(process.env.PORT, () => {
   console.log(
     colors.green(`[SERVER] [http://${ip.address()}:${process.env.PORT}]`),
   );
-  console.log(colors.green(`[process.env.NODE_ENV] [${process.env.NODE_ENV}]`));
+  console.log(colors.green(`[NODE_ENV] [${process.env.NODE_ENV}]`));
 });
 
 function template({ body, reduxState, helmet, styles }) {
@@ -107,7 +77,6 @@ function template({ body, reduxState, helmet, styles }) {
               ${helmet.title.toString()}
               ${helmet.meta.toString()}
               ${styles}
-              <link rel="stylesheet" href="/style.css">
           </head>
           <body>
               <div id="app">${body}</div>
@@ -115,8 +84,9 @@ function template({ body, reduxState, helmet, styles }) {
           <script>
               window.REDUX_DATA = ${JSON.stringify(reduxState)}
           </script>
-          <script src="/app.bundle.js"></script>
-          ${isDevelopment ? '<script src="/reload/reload.js"></script>' : ''}
+          <script src="client.js"></script>
         </html>
     `;
 }
+
+// https://github.com/suhanw/blog-react-ssr

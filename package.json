@@ -6,7 +6,7 @@
   "author": "Anton Fedorovskyi <anton.fedorovsky@gmail.com>",
   "main": "./dist/server.js",
   "scripts": {
-    "prettier": "prettier --write src/**/*.{ts,tsx}",
+    "prettier": "prettier 'src/**/*.{ts,tsx}' --write",
     "client:dev:watch": "webpack --config webpack.client.js --mode=development --watch",
     "server:dev:watch": "webpack --config webpack.server.js --mode=development --watch",
     "client:prod": "webpack --config webpack.client.js --mode=production",

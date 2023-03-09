@@ -14,6 +14,11 @@
     "build": "npm-run-all --parallel client:prod server:prod",
     "start": "npm-run-all --parallel client:dev:watch server:dev:watch"
   },
+  "browserslist": [
+    "last 2 versions",
+    "ie >= 9",
+    "last 5 Android versions"
+  ],
   "dependencies": {
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.0",
@@ -48,7 +53,6 @@
   },
   "devDependencies": {
     "babel-loader": "^9.1.2",
-    "lint-staged": "^13.1.2",
     "nodemon-webpack-plugin": "^4.8.1",
     "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
@@ -60,15 +64,8 @@
     "webpack-dev-server": "^4.11.1",
     "webpack-node-externals": "^3.0.0"
   },
-  "browserslist": [
-    "last 2 versions",
-    "ie >= 9",
-    "last 5 Android versions"
-  ],
-  "lint-staged": {
-    "*.js": [
-      "npm run prettier --write",
-      "git add"
-    ]
-  }
+  "engines": {
+    "node": ">=16"
+  },
+  "engineStrict": true
 }

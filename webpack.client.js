@@ -1,4 +1,8 @@
+const webpack = require('webpack');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const ASSET_PATH = '/public/';
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -11,9 +15,9 @@ module.exports = {
     app: path.resolve(__dirname, 'src/client.tsx'),
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'client.js',
-    publicPath: `/`
+    publicPath: ASSET_PATH,
   },
   module: {
     rules: [
@@ -28,7 +32,19 @@ module.exports = {
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public'),
+          to: path.resolve(__dirname, 'dist/public'),
+        },
+      ],
+    }),
+    new webpack.DefinePlugin({
+      'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH),
+    }),
+  ],
   stats: {
     colors: true,
     modules: false,

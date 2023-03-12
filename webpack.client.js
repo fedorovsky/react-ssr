@@ -1,9 +1,11 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 module.exports = {
   context: path.join(__dirname, 'src'),
-  devtool: 'source-map',
+  devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     modules: ['src', 'node_modules'],

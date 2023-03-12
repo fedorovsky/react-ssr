@@ -12,8 +12,8 @@
     "server:dev:watch": "webpack --config webpack.server.js --mode=development --watch",
     "client:prod": "webpack --config webpack.client.js --mode=production",
     "server:prod": "webpack --config webpack.server.js --mode=production",
-    "build": "npm run clean && npm-run-all --parallel client:prod server:prod",
-    "start": "npm run clean && npm-run-all --parallel client:dev:watch server:dev:watch"
+    "build": "npm run clean && cross-env NODE_ENV=production npm-run-all --parallel client:prod server:prod",
+    "start": "npm run clean && cross-env NODE_ENV=development npm-run-all --parallel client:dev:watch server:dev:watch"
   },
   "browserslist": [
     "last 2 versions",
@@ -55,6 +55,7 @@
   "devDependencies": {
     "babel-loader": "^9.1.2",
     "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
     "nodemon-webpack-plugin": "^4.8.1",
     "npm-run-all": "^4.1.5",
     "path": "^0.12.7",

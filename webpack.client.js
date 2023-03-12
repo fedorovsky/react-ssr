@@ -1,7 +1,10 @@
 const path = require('path');
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV === 'development';
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -49,6 +52,7 @@ module.exports = {
         },
       ],
     }),
+    ...(isProduction ? [new BundleAnalyzerPlugin()]: []),
   ],
   stats: {
     colors: true,

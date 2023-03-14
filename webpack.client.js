@@ -47,7 +47,15 @@ module.exports = {
         },
       ],
     }),
-    ...(isProduction ? [new BundleAnalyzerPlugin()]: []),
+    ...(isProduction
+      ? [
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'disabled',
+            generateStatsFile: true,
+            statsOptions: { source: false },
+          }),
+        ]
+      : []),
   ],
   stats: {
     colors: true,

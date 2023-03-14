@@ -13,7 +13,8 @@
     "client:prod": "webpack --config webpack.client.js --mode=production",
     "server:prod": "webpack --config webpack.server.js --mode=production",
     "build": "npm run clean && cross-env NODE_ENV=production npm-run-all --parallel client:prod server:prod",
-    "start": "npm run clean && cross-env NODE_ENV=development npm-run-all --parallel client:dev:watch server:dev:watch"
+    "start": "npm run clean && cross-env NODE_ENV=development npm-run-all --parallel client:dev:watch server:dev:watch",
+    "bundle-report": "npm run build && webpack-bundle-analyzer --port 4200 dist/stats.json"
   },
   "browserslist": [
     "last 2 versions",

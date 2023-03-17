@@ -1,0 +1,24 @@
+{
+  "include": ["src/**/*.ts", "src/**/*.tsx", "global.d.ts"],
+  "exclude": [],
+  "compilerOptions": {
+    "module": "esnext",
+    "removeComments": false,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "allowJs": false,
+    "checkJs": false,
+    "jsx": "react",
+    "baseUrl": "./src",
+    "sourceMap": true,
+    "target": "ES2018",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+  }
+}

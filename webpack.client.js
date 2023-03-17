@@ -7,7 +7,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  context: path.join(__dirname, 'src'),
+  context: path.resolve(__dirname, 'src'),
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
@@ -31,7 +31,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: path.resolve(__dirname, 'tsconfig.json'),
+              configFile: path.resolve(__dirname, 'tsconfig.client.json'),
             },
           },
         ],

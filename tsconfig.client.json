@@ -1,17 +1,22 @@
 {
-  "include": ["src/**/*.ts", "src/**/*.tsx", "global.d.ts"],
+  "include": ["src", "global.d.ts"],
   "exclude": [],
   "compilerOptions": {
+    "target": "ES2018",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "removeComments": false,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "allowJs": false,
     "checkJs": false,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "baseUrl": "./src",
     "sourceMap": true,
-    "target": "ES2018",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,

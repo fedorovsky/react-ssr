@@ -41,6 +41,8 @@
     "styled-components": "^5.3.8"
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.6",
+    "@types/styled-components": "^5.1.26",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
     "nodemon-webpack-plugin": "^4.8.1",

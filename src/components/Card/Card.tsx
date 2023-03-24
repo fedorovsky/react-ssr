@@ -19,7 +19,7 @@ const UserList: React.FC = () => {
   return (
     <Styled.Wrapper>
       <Styled.Img src="/public/img/img.png" />
-      <Styled.Background src="/public/img/img.png" />
+      <Styled.Background />
 
       <button type="button" onClick={handleClick}>
         GET USER LIST

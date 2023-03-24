@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
 import { initStore } from './store';
+import express from 'express';
 import App from './App';
 
 const ip = require('ip');
 const path = require('path');
 const cors = require('cors');
 const logger = require('morgan');
-const express = require('express');
 const colors = require('colors');
 const dotenv = require('dotenv');
 
@@ -63,10 +63,17 @@ app.listen(process.env.PORT, () => {
   console.log(colors.green(`[NODE_ENV] [${process.env.NODE_ENV}]`));
 });
 
-function template({ body, reduxState, helmet, styles }) {
+
+type TemplateData = {
+    body: string,
+    reduxState: any,
+    helmet: any,
+    styles: string
+}
+function template({ body, reduxState, helmet, styles }: TemplateData) {
   return `
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
           <head>
               <meta charset="utf-8">
               <meta name="description" content="">

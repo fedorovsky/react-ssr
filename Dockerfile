@@ -18,3 +18,7 @@ RUN npm run build
 
 # Start the application
 CMD ["node", "./dist/server.js"]
+
+# Image:        `docker build -t ssr-container .`
+# Container:    `docker run -d -p 8000:8000 --rm --name ssr-container ssr-image`
+# Stop:         `docker stop ssr-container`

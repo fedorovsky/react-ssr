@@ -81,6 +81,7 @@ function template({ body, reduxState, helmet, styles }: TemplateData) {
               ${helmet.title.toString()}
               ${helmet.meta.toString()}
               ${styles}
+              <script src="vendor.js"></script>
           </head>
           <body>
               <div id="app">${body}</div>

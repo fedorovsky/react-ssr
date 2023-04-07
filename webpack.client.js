@@ -57,6 +57,17 @@ module.exports = {
         ]
       : []),
   ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   stats: {
     colors: true,
     modules: false,

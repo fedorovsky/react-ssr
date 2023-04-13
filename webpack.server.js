@@ -4,8 +4,7 @@ const NodemonPlugin = require('nodemon-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  context: path.join(__dirname, 'src'),
-  entry: path.resolve(__dirname, 'src/server.tsx'),
+  entry: path.resolve(__dirname, 'src', 'server.tsx'),
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     modules: ['src', 'node_modules'],
@@ -13,7 +12,7 @@ module.exports = {
   target: 'node',
   externals: [nodeExternals()],
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'server.js',
   },
   module: {
@@ -26,10 +25,10 @@ module.exports = {
             loader: 'ts-loader',
             options: {
               configFile: path.resolve(__dirname, 'tsconfig.server.json'),
-              transpileOnly: true
-            }
-          }
-        ]
+              transpileOnly: true,
+            },
+          },
+        ],
       },
     ],
   },

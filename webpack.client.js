@@ -7,14 +7,13 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     modules: ['src', 'node_modules'],
   },
   entry: {
-    client: path.resolve(__dirname, 'src/client.tsx'),
+    client: path.resolve(__dirname, 'src', 'client.tsx'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -43,20 +42,17 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'public'),
-          to: path.resolve(__dirname, 'dist/public'),
+          to: path.resolve(__dirname, 'dist', 'public'),
         },
       ],
     }),
-    ...(isProduction
-      ? [
-          new BundleAnalyzerPlugin({
-            analyzerMode: 'disabled',
-            generateStatsFile: true,
-            statsOptions: { source: false },
-          }),
-        ]
-      : []),
-  ],
+    isProduction &&
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'disabled',
+        generateStatsFile: true,
+        statsOptions: { source: false },
+      }),
+  ].filter(Boolean),
   optimization: {
     splitChunks: {
       cacheGroups: {

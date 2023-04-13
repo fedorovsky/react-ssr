@@ -31,8 +31,7 @@ if (isDevelopment) {
 app.use(cors());
 
 /* Static */
-app.use(express.static(path.resolve('./dist')));
-app.use('/public', express.static('./public'));
+app.use(express.static(path.resolve(__dirname)));
 
 app.get('*', (req, res) => {
   const store = initStore();

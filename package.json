@@ -22,6 +22,7 @@
     "last 5 Android versions"
   ],
   "dependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
@@ -49,13 +50,16 @@
     "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
     "prettier": "^2.8.4",
+    "react-refresh-typescript": "^2.0.9",
     "rimraf": "^4.4.0",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",
     "webpack": "^5.75.0",
     "webpack-bundle-analyzer": "^4.8.0",
     "webpack-cli": "^5.0.1",
+    "webpack-dev-middleware": "^6.0.2",
     "webpack-dev-server": "^4.11.1",
+    "webpack-hot-middleware": "^2.25.3",
     "webpack-node-externals": "^3.0.0"
   },
   "engines": {

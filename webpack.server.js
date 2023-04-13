@@ -4,7 +4,6 @@ const NodemonPlugin = require('nodemon-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  context: path.join(__dirname, 'src'),
   entry: path.resolve(__dirname, 'src/server.tsx'),
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
@@ -33,7 +32,9 @@ module.exports = {
       },
     ],
   },
-  plugins: [new NodemonPlugin()],
+  plugins: [new NodemonPlugin({
+    watch: path.resolve('./src/server.tsx')
+  })],
   stats: {
     colors: true,
     modules: false,

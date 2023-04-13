@@ -14,6 +14,11 @@ const logger = require('morgan');
 const colors = require('colors');
 const dotenv = require('dotenv');
 
+const webpack = require('webpack');
+const WebpackDevMiddleware = require('webpack-dev-middleware');
+const WebpackHotMiddleware = require('webpack-hot-middleware');
+const webpackConfig = require('../webpack.client.js');
+
 /* process.env -> .env */
 dotenv.config();
 
@@ -21,6 +26,21 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 const app = express();
+
+const compiler = webpack(webpackConfig);
+
+app.use(
+  WebpackDevMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+    serverSideRender: true,
+  }),
+);
+app.use(
+  WebpackHotMiddleware(compiler, {
+    reload: true,
+    heartbeat: 500,
+  }),
+);
 
 /* Logger morgan */
 if (isDevelopment) {
@@ -63,13 +83,12 @@ app.listen(process.env.PORT, () => {
   console.log(colors.green(`[NODE_ENV] [${process.env.NODE_ENV}]`));
 });
 
-
 type TemplateData = {
-    body: string,
-    reduxState: any,
-    helmet: any,
-    styles: string
-}
+  body: string;
+  reduxState: any;
+  helmet: any;
+  styles: string;
+};
 function template({ body, reduxState, helmet, styles }: TemplateData) {
   return `
         <!DOCTYPE html>

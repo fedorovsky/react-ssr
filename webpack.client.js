@@ -2,19 +2,23 @@ const path = require('path');
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const {HotModuleReplacementPlugin, NoEmitOnErrorsPlugin} = require("webpack");
+
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshTypeScript = require('react-refresh-typescript');
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
+  mode: 'development',
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     modules: ['src', 'node_modules'],
   },
   entry: {
-    client: path.resolve(__dirname, 'src/client.tsx'),
+    client: ['webpack-hot-middleware/client', './src/client.tsx'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -31,7 +35,10 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: path.resolve(__dirname, 'tsconfig.client.json'),
+              getCustomTransformers: () => ({
+                before: [isDevelopment && ReactRefreshTypeScript()].filter(Boolean),
+              }),
+              transpileOnly: true,
             },
           },
         ],
@@ -39,6 +46,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new ReactRefreshWebpackPlugin(),
+    new HotModuleReplacementPlugin(),
+    new NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -47,18 +57,15 @@ module.exports = {
         },
       ],
     }),
-    ...(isProduction
-      ? [
-          new BundleAnalyzerPlugin({
-            analyzerMode: 'disabled',
-            generateStatsFile: true,
-            statsOptions: { source: false },
-          }),
-        ]
-      : []),
-  ],
+    isProduction && new BundleAnalyzerPlugin({
+      analyzerMode: 'disabled',
+      generateStatsFile: true,
+      statsOptions: { source: false },
+    })
+  ].filter(Boolean),
   optimization: {
     splitChunks: {
+      chunks: "all",
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,

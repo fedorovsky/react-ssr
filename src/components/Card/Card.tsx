@@ -18,11 +18,9 @@ const UserList: React.FC = () => {
 
   return (
     <Styled.Wrapper>
-      <Styled.Img src="/public/img/img.png" />
-      <Styled.Background />
 
       <button type="button" onClick={handleClick}>
-        GET USER LIST
+        GET USER LIST 4
       </button>
 
       <button type="button" onClick={handleShow}>

@@ -19,10 +19,11 @@ RUN npm run build
 # Start the application
 CMD ["node", "./dist/server.js"]
 
-# Create image:     docker build -t ssr-image .
-# Run container:    docker run -d -p 8000:8000 --rm --name ssr-container ssr-image
-# Stop container:   docker stop ssr-container
+# Create image:         docker build -t ssr-image .
+# Run container:        docker run -d -p 8000:8000 --rm --name ssr-container ssr-image
+# Stop container:       docker stop ssr-container
+# Enter container:      docker exec -it ssr-container sh
 
-# Show containers:  docker ps
-# Show images:      docker images
-# Remove image:     docker rmi ssr-image
+# Show containers:      docker ps
+# Show images:          docker images
+# Remove image:         docker rmi ssr-image

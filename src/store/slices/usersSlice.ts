@@ -43,7 +43,7 @@ const postsSlice = createSlice({
       .addCase(fetchUserList.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.list = action.payload;
-        state.error = undefined; // Reset error to null when fetch succeeds
+        state.error = undefined; // Reset error when fetch succeeds
       })
       .addCase(fetchUserList.rejected, (state, action) => {
         state.status = 'failed';

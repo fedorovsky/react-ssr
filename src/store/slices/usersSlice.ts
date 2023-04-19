@@ -14,13 +14,13 @@ export interface User {
 export interface UsersState {
   readonly list: User[];
   readonly status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  readonly error: string | undefined;
+  readonly error: string | null;
 }
 
 const initialState: UsersState = {
   list: [],
   status: 'idle',
-  error: undefined,
+  error: null,
 };
 
 const postsSlice = createSlice({
@@ -35,11 +35,11 @@ const postsSlice = createSlice({
       .addCase(fetchUserList.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.list = action.payload;
-        state.error = undefined; // Reset error when fetch succeeds
+        state.error = null;
       })
       .addCase(fetchUserList.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message || null;
       });
   },
 });

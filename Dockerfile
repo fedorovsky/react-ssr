@@ -23,6 +23,7 @@ CMD ["node", "./dist/server.js"]
 # Run container:        docker run -d -p 8000:8000 --rm --name ssr-container ssr-image
 # Stop container:       docker stop ssr-container
 # Enter container:      docker exec -it ssr-container sh
+# Exit container:       exit
 
 # Show containers:      docker ps
 # Show images:          docker images

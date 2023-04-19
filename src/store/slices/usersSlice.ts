@@ -23,14 +23,6 @@ const initialState: UsersState = {
   error: undefined,
 };
 
-
-export const fetchUserList = createAsyncThunk(`${_SLICE_NAME_}/fetchAll`, async (params, thunkAPI) => {
-  const response = await fetchData<User[]>(
-      'https://jsonplaceholder.typicode.com/users',
-  )
-  return response;
-});
-
 const postsSlice = createSlice({
   name: _SLICE_NAME_,
   initialState,
@@ -52,10 +44,25 @@ const postsSlice = createSlice({
   },
 });
 
+export const fetchUserList = createAsyncThunk(
+  `${_SLICE_NAME_}/fetchAll`,
+  async (params, thunkAPI) => {
+    const response = await fetchData<User[]>(
+      'https://jsonplaceholder.typicode.com/users',
+    );
+    return response;
+  },
+);
+
 export const stateSelector = (state: RootState): UsersState => state.users;
 export const userListSelector = createSelector(
   stateSelector,
   (state) => state.list,
+);
+
+export const statusSelector = createSelector(
+  stateSelector,
+  (state) => state.status,
 );
 
 export default postsSlice.reducer;

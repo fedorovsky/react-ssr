@@ -5,7 +5,8 @@ import {
   fetchUserList,
   userListSelector,
   statusSelector,
-} from 'store/slices/usersSlice';
+} from 'store/users/slice';
+import * as Styled from './UserList.styled';
 
 const UserList = () => {
   const userList = useAppSelector(userListSelector);
@@ -15,7 +16,7 @@ const UserList = () => {
   const handleClick = () => dispatch(fetchUserList());
 
   return (
-    <div>
+    <Styled.Wrapper>
       <button type="button" onClick={handleClick}>
         GET USER LIST
       </button>
@@ -28,7 +29,7 @@ const UserList = () => {
           ))}
         </ul>
       )}
-    </div>
+    </Styled.Wrapper>
   );
 };
 

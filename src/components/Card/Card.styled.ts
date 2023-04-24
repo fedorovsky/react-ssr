@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   border: 1px solid red;
-  padding: 20px;
+  padding: 1rem;
 `;
 
 export const Img = styled.img`

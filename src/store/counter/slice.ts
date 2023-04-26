@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const _SLICE_NAME_ = 'counter';
 
-export interface UsersState {
+export interface Counter {
   readonly value: number;
 }
 
-const initialState: UsersState = {
+const initialState: Counter = {
   value: 0,
 };
 
@@ -23,4 +23,4 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {},
 });
-export const { reducer: counterReducer, actions: counterActions } = slice;
+export const { reducer, actions } = slice;

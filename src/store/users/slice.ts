@@ -1,9 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createSelector } from 'reselect';
-import fetchData from 'utils/fetchData';
-import { RootState } from '../index';
-
-const _SLICE_NAME_ = 'users';
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchUserList } from './thunkActions';
+import { _SLICE_NAME_ } from './constants';
 
 export interface User {
   id: number;
@@ -23,7 +20,7 @@ const initialState: UsersState = {
   error: null,
 };
 
-const postsSlice = createSlice({
+const slice = createSlice({
   name: _SLICE_NAME_,
   initialState,
   reducers: {},
@@ -44,25 +41,4 @@ const postsSlice = createSlice({
   },
 });
 
-export const fetchUserList = createAsyncThunk(
-  `${_SLICE_NAME_}/fetchAll`,
-  async (params, thunkAPI) => {
-    const response = await fetchData<User[]>(
-      'https://jsonplaceholder.typicode.com/users',
-    );
-    return response;
-  },
-);
-
-export const stateSelector = (state: RootState): UsersState => state.users;
-export const userListSelector = createSelector(
-  stateSelector,
-  (state) => state.list,
-);
-
-export const statusSelector = createSelector(
-  stateSelector,
-  (state) => state.status,
-);
-
-export default postsSlice.reducer;
+export const { reducer, actions } = slice;

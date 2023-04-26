@@ -1,19 +1,15 @@
 import * as React from 'react';
 import useAppSelector from 'hooks/useAppSelector';
 import useAppDispatch from 'hooks/useAppDispatch';
-import {
-  fetchUserList,
-  userListSelector,
-  statusSelector,
-} from 'store/users/slice';
+import * as usersModule from 'store/users';
 import * as Styled from './UserList.styled';
 
 const UserList = () => {
-  const userList = useAppSelector(userListSelector);
-  const status = useAppSelector(statusSelector);
+  const userList = useAppSelector(usersModule.selectors.userListSelector);
+  const status = useAppSelector(usersModule.selectors.statusSelector);
   const dispatch = useAppDispatch();
 
-  const handleClick = () => dispatch(fetchUserList());
+  const handleClick = () => dispatch(usersModule.thunkActions.fetchUserList());
 
   return (
     <Styled.Wrapper>

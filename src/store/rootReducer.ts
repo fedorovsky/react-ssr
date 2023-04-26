@@ -1,8 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import usersReducer from './users/slice';
-import { counterReducer } from './counter';
+import * as usersModule from './users';
+import * as counterModule from './counter';
 
 export default combineReducers({
-  users: usersReducer,
-  counter: counterReducer,
+  users: usersModule.reducer,
+  counter: counterModule.reducer,
 });

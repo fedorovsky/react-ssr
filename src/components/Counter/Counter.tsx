@@ -10,11 +10,14 @@ const Counter = () => {
 
   const handleIncrease = () => dispatch(counterModule.actions.increase());
 
+  const handleSetValue = () => dispatch(counterModule.actions.setValue(5));
+
   return (
     <Styled.Wrapper>
       <button onClick={handleDecrease}>-</button>
-      <span> {value} </span>
       <button onClick={handleIncrease}>+</button>
+      <button onClick={handleSetValue}>set 5</button>
+      <span> {value} </span>
     </Styled.Wrapper>
   );
 };

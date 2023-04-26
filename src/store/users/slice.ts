@@ -8,13 +8,13 @@ export interface User {
   username: string;
 }
 
-export interface UsersState {
+export interface Users {
   readonly list: User[];
   readonly status: 'idle' | 'loading' | 'succeeded' | 'failed';
   readonly error: string | null;
 }
 
-const initialState: UsersState = {
+const initialState: Users = {
   list: [],
   status: 'idle',
   error: null,

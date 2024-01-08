@@ -1,3 +1,4 @@
+import * as React from 'react';
 import useAppSelector from 'hooks/useAppSelector';
 import useAppDispatch from 'hooks/useAppDispatch';
 import * as counterModule from 'store/counter';
@@ -11,6 +12,10 @@ const Counter = () => {
   const handleIncrease = () => dispatch(counterModule.actions.increase());
 
   const handleSetValue = () => dispatch(counterModule.actions.setValue(5));
+
+  React.useEffect(() => {
+    const hello = () => console.log('hello');
+  }, []);
 
   return (
     <Styled.Wrapper>

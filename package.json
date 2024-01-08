@@ -22,7 +22,7 @@
     "last 5 Android versions"
   ],
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.3",
+    "@reduxjs/toolkit": "^2.0.1",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/react-redux": "^7.1.25",

@@ -7,7 +7,11 @@ module.exports = {
   entry: path.resolve(__dirname, 'src', 'server.tsx'),
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
-    modules: ['src', 'node_modules'],
+    modules: [
+      'node_modules',
+      path.resolve('node_modules'),
+      path.resolve('src'),
+    ],
   },
   target: 'node',
   externals: [nodeExternals()],

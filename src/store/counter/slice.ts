@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 const _SLICE_NAME_ = 'counter';
 
 export interface Counter {
-  readonly value: number;
+  value: number;
 }
 
 const initialState: Counter = {

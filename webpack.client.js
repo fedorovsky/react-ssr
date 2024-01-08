@@ -10,7 +10,11 @@ module.exports = {
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
-    modules: ['src', 'node_modules'],
+    modules: [
+      'node_modules',
+      path.resolve('node_modules'),
+      path.resolve('src'),
+    ],
   },
   entry: {
     client: path.resolve(__dirname, 'src', 'client.tsx'),

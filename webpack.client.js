@@ -28,17 +28,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader',
-          {
-            loader: 'ts-loader',
-            options: {
-              configFile: path.resolve(__dirname, 'tsconfig.client.json'),
-            },
-          },
-        ],
+        use: ['babel-loader'],
       },
     ],
   },
@@ -58,17 +50,6 @@ module.exports = {
         statsOptions: { source: false },
       }),
   ].filter(Boolean),
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-        },
-      },
-    },
-  },
   stats: {
     colors: true,
     modules: false,

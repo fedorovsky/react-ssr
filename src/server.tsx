@@ -62,13 +62,12 @@ app.listen(process.env.PORT, () => {
   console.log(colors.green(`[NODE_ENV] [${process.env.NODE_ENV}]`));
 });
 
-
 type TemplateData = {
-    body: string,
-    reduxState: any,
-    helmet: any,
-    styles: string
-}
+  body: string;
+  reduxState: any;
+  helmet: any;
+  styles: string;
+};
 function template({ body, reduxState, helmet, styles }: TemplateData) {
   return `
         <!DOCTYPE html>
@@ -80,7 +79,6 @@ function template({ body, reduxState, helmet, styles }: TemplateData) {
               ${helmet.title.toString()}
               ${helmet.meta.toString()}
               ${styles}
-              <script src="vendor.js"></script>
           </head>
           <body>
               <div id="app">${body}</div>

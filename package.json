@@ -8,6 +8,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "prettier": "prettier 'src/**/*.{ts,tsx}' --write",
+    "client:dev": "webpack --config webpack.client.js --mode=development",
     "client:dev:watch": "webpack --config webpack.client.js --mode=development --watch",
     "server:dev:watch": "webpack --config webpack.server.js --mode=development --watch",
     "client:prod": "webpack --config webpack.client.js --mode=production",
@@ -23,7 +24,7 @@
     "last 5 Android versions"
   ],
   "dependencies": {
-    "@reduxjs/toolkit": "^2.0.1",
+    "@reduxjs/toolkit": "2.1.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/react-redux": "^7.1.25",
@@ -47,6 +48,7 @@
     "@babel/plugin-transform-runtime": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
     "@types/react-helmet": "^6.1.6",
     "@types/styled-components": "^5.1.26",
     "babel-loader": "^9.1.3",

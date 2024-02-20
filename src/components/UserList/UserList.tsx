@@ -3,12 +3,7 @@ import { useGetUsersQuery } from 'store/users/api';
 import * as Styled from './UserList.styled';
 
 const UserList = () => {
-  const {
-    data: userList,
-    error,
-    isLoading,
-    refetch,
-  } = useGetUsersQuery(undefined, {
+  const { data: userList } = useGetUsersQuery(undefined, {
     // refetchOnFocus: isActiveFocus,
     // refetchOnMountOrArgChange: 5
   });
@@ -19,6 +14,7 @@ const UserList = () => {
 
   return (
     <Styled.Wrapper>
+      <h1>User List</h1>
       {
         <ul>
           {userList.map((user) => (

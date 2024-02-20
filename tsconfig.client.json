@@ -2,7 +2,7 @@
   "include": ["src", "global.d.ts"],
   "exclude": [],
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "ES2020",
     "lib": [
       "dom",
       "dom.iterable",

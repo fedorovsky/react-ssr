@@ -1,1 +1,16 @@
-{}
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "chrome": "62"
+      },
+      "useBuiltIns": "usage",
+      "corejs": 3
+    }],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-runtime"
+  ]
+}

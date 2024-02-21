@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx', '.mjs'],
     modules: [
       'node_modules',
       path.resolve('node_modules'),
@@ -28,9 +28,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
+        test: /\.(js|jsx|ts|tsx|mjs)$/,
+        include: [
+          path.resolve('src'),
+          path.resolve('node_modules', '@reduxjs/toolkit'),
+          path.resolve('node_modules', 'immer'),
+          path.resolve('node_modules', 'reselect'),
+          path.resolve('node_modules', 'react-redux'),
+        ],
+        loader: 'babel-loader',
+        options: {
+          babelrc: false,
+          configFile: require.resolve('./babel.config.js'),
+        },
       },
     ],
   },

@@ -1,3 +1,4 @@
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import * as React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';

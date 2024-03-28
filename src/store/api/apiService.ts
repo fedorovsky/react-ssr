@@ -11,13 +11,16 @@ export const apiService = createApi({
     // Используем fetchBaseQuery с динамическим baseUrl
     const baseQuery = fetchBaseQuery({
       baseUrl: 'https://jsonplaceholder.typicode.com/',
+      headers: {
+        'Content-Type': 'application/json', // Указываем, что отправляем данные в формате JSON
+      },
       prepareHeaders: (headers, { getState }) => {
         return headers;
       },
     });
     return baseQuery(args, api, extraOptions);
   },
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Newsfeed'],
   refetchOnReconnect: true,
   endpoints: () => ({}),
 });

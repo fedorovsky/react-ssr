@@ -24,7 +24,7 @@
     "last 5 Android versions"
   ],
   "dependencies": {
-    "@reduxjs/toolkit": "2.2.1",
+    "@reduxjs/toolkit": "2.2.2",
     "@types/react": "^18.2.57",
     "@types/react-dom": "^18.2.19",
     "@types/react-redux": "^7.1.33",
@@ -34,6 +34,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
     "ip": "^2.0.1",
     "morgan": "^1.10.0",
     "react": "^18.2.0",

@@ -3,8 +3,9 @@ import * as ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
-import { initStore } from './store';
 import express from 'express';
+const { createProxyMiddleware } = require('http-proxy-middleware');
+import { initStore } from './store';
 import App from './App';
 
 const ip = require('ip');
@@ -32,6 +33,17 @@ app.use(cors());
 
 /* Static */
 app.use(express.static(path.resolve(__dirname)));
+
+/**
+ * Proxy
+ */
+app.use(
+  '/api',
+  createProxyMiddleware({
+    target: 'https://desktop.plarium.com',
+    changeOrigin: true,
+  }),
+);
 
 app.get('*', (req, res) => {
   const store = initStore();
